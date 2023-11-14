@@ -1,8 +1,13 @@
-import { getMovies } from "../movies/apiMovies";
+import { useEffect } from "react";
 import { useGetMovies } from "../movies/useGetMovies";
 import Spinner from "../ui/Spinner";
+import { getMovie } from "../services/apiMovies";
 
 function Poster() {
+  useEffect(function () {
+    getMovie().then((data) => console.log(data));
+  }, []);
+
   const handleShowMovies = function () {
     // console.log(getMovies());
   };
