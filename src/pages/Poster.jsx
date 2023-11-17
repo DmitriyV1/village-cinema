@@ -1,32 +1,21 @@
-import { useEffect } from "react";
 import { useGetMovies } from "../movies/useGetMovies";
 import Spinner from "../ui/Spinner";
-import { getMovie } from "../services/apiMovies";
+import MoviesRow from "../movies/MoviesRow";
+import Table from "../ui/Table";
 
 function Poster() {
-  useEffect(function () {
-    getMovie().then((data) => console.log(data));
-  }, []);
-
-  const handleShowMovies = function () {
-    // console.log(getMovies());
-  };
-
   const { isLoading, movies } = useGetMovies();
-
-  if (isLoading) return;
-  movies.map((movie) => {
-    console.log(movie);
-  });
 
   return (
     <>
-      <div>Poster</div>
-      <span>
-        <button onClick={() => console.log(movies)}>Get movies</button>
-        <button onClick={handleShowMovies}>Show movies</button>
-      </span>
-      {isLoading ? <Spinner /> : <div>zagruzil</div>}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Table.Body
+          data={movies}
+          render={(mov) => <MoviesRow movie={mov} key={mov.id} />}
+        />
+      )}
     </>
   );
 }

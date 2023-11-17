@@ -8,7 +8,9 @@ const StyledHeader = styled.header`
   justify-content: flex-end;
   gap: 2.5rem;
 
-  border-bottom: 1px solid var(--color-grey-100);
+  border-bottom: 1px solid var(--color-grey-200);
+
+  min-height: 8vh;
 `;
 
 function Header() {
