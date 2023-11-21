@@ -31,6 +31,7 @@ function App() {
               <Route path="poster" element={<Poster />} />
               <Route path="account" element={<Account />} />
               <Route path="addMovie" element={<AddMovie />} />
+              <Route path="addMovie/:movieId" element={<AddMovie />} />
             </Route>
           </Routes>
         </BrowserRouter>
