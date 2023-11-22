@@ -3,38 +3,32 @@ import AddMovieRow from "../ui/AddMovieRow";
 import SearchBar from "../ui/SearchBar";
 import { useGetMoviesToAdd } from "../movies/useGetMoviesToAdd";
 import { useEffect, useState } from "react";
+import Table from "../ui/Table";
+import Spinner from "../ui/Spinner";
 
 function AddMovie() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  // const movieParams = searchParams.get("movie") || "";
-  const [namedMovies, setNamedMovies] = useState("");
+  const movieParams = searchParams.get("movie") || ".";
+  const { isLoading, movies, refetch } = useGetMoviesToAdd(movieParams);
 
-  useEffect(
-    function () {
-      setNamedMovies(searchParams.get("movie"));
-    },
-    [searchParams, namedMovies]
-  );
-  searchParams.get("movie");
-
-  const { isLoading, movies } = useGetMoviesToAdd(namedMovies);
-
-  const handleClick = function () {
-    isLoading ? console.log("Ждем") : console.log(movies);
-    console.log(namedMovies);
-  };
+  useEffect(() => {
+    refetch();
+  }, [movieParams, refetch]);
 
   return (
     <>
       <SearchBar />
-
-      {/* <Table.Body> */}
-      <AddMovieRow />
-      {/* </Table.Body> */}
-      <span>
-        <button onClick={handleClick}>Показать</button>
-      </span>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        (isLoading && <Spinner />) || (
+          <Table.Body
+            data={movieParams.length < 3 ? [] : movies}
+            render={(mov) => <AddMovieRow movie={mov} key={mov.id} />}
+          />
+        )
+      )}
     </>
   );
 }
