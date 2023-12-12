@@ -8,6 +8,7 @@ const RowUnit = styled.div`
   color: var(--color-grey-600);
   font-family: "Sono";
   border-bottom: solid 1px var(--color-grey-400);
+  max-width: 70vh;
 `;
 
 const Img = styled.img`
@@ -25,11 +26,11 @@ const Wrapper = styled.div`
 
 function MoviesRow({ movie }) {
   const { id, country, genre: genres, name, time, year, poster } = movie;
-
+  console.log(movie);
   return (
     <>
       <Wrapper>
-        <Row type="horizontal">
+        <Row type="horizontal" space="gap">
           <Img src={poster} />
 
           <Row type="vertical">
@@ -39,7 +40,7 @@ function MoviesRow({ movie }) {
             <RowUnit>
               {country.includes(",") ? "Страны:" : "Страна: "} {country}
             </RowUnit>
-            <RowUnit>{genres}</RowUnit>
+            <RowUnit>Жанр: {genres}</RowUnit>
           </Row>
         </Row>
       </Wrapper>

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Row from "./Row";
 import { HiDocumentPlus } from "react-icons/hi2";
+import { useAddMovie } from "../movies/useAddMovie";
+import { useQuery } from "@tanstack/react-query";
 
 const RowUnit = styled.div`
   font-size: 2.25rem;
@@ -36,12 +38,33 @@ const StyledButton = styled.button`
 
 function AddMovieRow({ movie }) {
   const { id, country, name, poster, year } = movie;
+  const user = useQuery({ queryKey: ["user"] });
+  const { isLoading, addCustomMovie } = useAddMovie();
+  const movieGenres = [];
+  const movieCountries = [];
 
   const handleClick = function (e) {
     e.preventDefault();
+
+    for (let i of movie.genres.values()) {
+      movieGenres.push(i.name);
+    }
+
+    for (let i of movie.countries.values()) {
+      movieCountries.push(i.name);
+    }
+
+    addCustomMovie({
+      name: movie.name,
+      year: movie.year,
+      country: movieCountries.toString().replaceAll(",", ", "),
+      time: movie.movieLength,
+      created_by: user.data.email || "nobody",
+      genre: movieGenres.toString().replaceAll(",", ", "),
+      poster: movie.poster.url,
+    });
   };
 
-  poster ? console.log(Object.values(poster)[0]) : "";
   return (
     <>
       <Wrapper>
@@ -55,10 +78,10 @@ function AddMovieRow({ movie }) {
           />
           <RowUnit>{name}</RowUnit>
           <RowUnit>{year}</RowUnit>
-          <StyledButton onClick={handleClick}>
-            <HiDocumentPlus />
-          </StyledButton>
         </Row>
+        <StyledButton onClick={handleClick}>
+          <HiDocumentPlus />
+        </StyledButton>
       </Wrapper>
     </>
   );

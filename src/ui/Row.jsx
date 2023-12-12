@@ -14,6 +14,13 @@ const Row = styled.div`
     css`
       flex-direction: column;
       gap: 1.6rem;
+    `} 
+    ${(props) =>
+    props.space === "gap" &&
+    css`
+      justify-content: left;
+      gap: 6rem;
+      align-items: center;
     `}
 `;
 export default Row;
