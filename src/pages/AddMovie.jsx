@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import AddMovieRow from "../ui/AddMovieRow";
 import SearchBar from "../ui/SearchBar";
 import { useGetMoviesToAdd } from "../movies/useGetMoviesToAdd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Table from "../ui/Table";
 import Spinner from "../ui/Spinner";
 

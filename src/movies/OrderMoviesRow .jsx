@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Row from "../ui/Row";
 import getCurrentDate from "../helpers/getCurrentDate";
-import Button from "../ui/Button";
+import ModalButton from "../ui/ModalButton";
 
 const RowUnit = styled.span`
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: "Sono";
@@ -50,7 +50,7 @@ const StyledParametrs = styled.div`
 function OrderMoviesRow({ movie }) {
   const { name, poster, created_by } = movie;
   const x = new Date();
-  console.log(x.getHours() > 12);
+  const hours = x.getHours();
 
   return (
     <Wrapper>
@@ -62,29 +62,77 @@ function OrderMoviesRow({ movie }) {
           <RowUnit>{name}</RowUnit>
           <Row type="horizontal">
             <StyledParametrs>
-              {getCurrentDate()}
-              <Button
-                variation={x > 12 ? "danger" : "primary"}
-                disabled={x > 12 ? true : false}
-              >
-                12:00
-              </Button>
-              <Button>15:00</Button>
-              <Button>18:00</Button>
+              <RowUnit>{getCurrentDate()}</RowUnit>
+
+              <ModalButton
+                time="12:00"
+                disabledRule={hours >= 12 ? true : false}
+                variationRule={hours >= 12 ? "danger" : "primary"}
+                date={getCurrentDate()}
+                name={name}
+                customer={created_by}
+              />
+
+              <ModalButton
+                time="15:00"
+                disabledRule={hours >= 15 ? true : false}
+                variationRule={hours >= 15 ? "danger" : "primary"}
+                date={getCurrentDate()}
+                name={name}
+                customer={created_by}
+              />
+              <ModalButton
+                time="18:00"
+                disabledRule={hours >= 18 ? true : false}
+                variationRule={hours >= 18 ? "danger" : "primary"}
+                date={getCurrentDate()}
+                name={name}
+                customer={created_by}
+              />
             </StyledParametrs>
 
             <StyledParametrs>
-              {getCurrentDate(1)}
-              <Button>12:00</Button>
-              <Button>15:00</Button>
-              <Button>18:00</Button>
+              <RowUnit>{getCurrentDate(1)}</RowUnit>
+              <ModalButton
+                time="12:00"
+                date={getCurrentDate(1)}
+                name={name}
+                customer={created_by}
+              />
+              <ModalButton
+                time="15:00"
+                date={getCurrentDate(1)}
+                name={name}
+                customer={created_by}
+              />
+              <ModalButton
+                time="18:00"
+                date={getCurrentDate(1)}
+                name={name}
+                customer={created_by}
+              />
             </StyledParametrs>
 
             <StyledParametrs>
-              {getCurrentDate(2)}
-              <Button>12:00</Button>
-              <Button>15:00</Button>
-              <Button>18:00</Button>
+              <RowUnit>{getCurrentDate(2)}</RowUnit>
+              <ModalButton
+                time="12:00"
+                date={getCurrentDate(2)}
+                name={name}
+                customer={created_by}
+              />
+              <ModalButton
+                time="15:00"
+                date={getCurrentDate(2)}
+                name={name}
+                customer={created_by}
+              />
+              <ModalButton
+                time="18:00"
+                date={getCurrentDate(2)}
+                name={name}
+                customer={created_by}
+              />
             </StyledParametrs>
           </Row>
         </Row>
