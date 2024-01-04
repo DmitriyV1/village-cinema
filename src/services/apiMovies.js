@@ -25,30 +25,3 @@ export async function addMovie(targetMovie) {
 
   return { data, error };
 }
-
-// export async function addMovie({
-//   name,
-//   year,
-//   country,
-//   time,
-//   created_by,
-//   genre,
-//   poster,
-// }) {
-//   const { data, error } = await supabase
-//     .from("movies")
-//     .insert([
-//       {
-//         name: { name },
-//         year: { year },
-//         country: { country },
-//         time: { time },
-//         created_by: { created_by },
-//         genre: { genre },
-//         poster: { poster },
-//       },
-//     ])
-//     .select();
-
-//   return { data, error };
-// }

@@ -1,8 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { SeatContext } from "./BuyTicket";
-import { getOrder } from "../orders/apiOrders";
 import useGetOrder from "../orders/useGetOrder";
+import { useQueryClient } from "@tanstack/react-query";
 
 const StyledSeats = styled.div`
   display: grid;
@@ -13,10 +13,14 @@ const StyledSeats = styled.div`
 `;
 
 function Seats({ time, date, name }) {
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries({ queryKey: ["orders"] });
+
   const { setSeat } = useContext(SeatContext);
   const x = [];
 
   const order = { time, date, name };
+
   const data = useGetOrder(order);
   const orderList = data?.orders?.data;
 
@@ -25,6 +29,8 @@ function Seats({ time, date, name }) {
     const target = e.target.value;
     setSeat(target);
   }
+
+  console.log(x);
 
   orderList?.forEach((e) => x.push(e.seat));
 

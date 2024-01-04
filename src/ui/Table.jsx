@@ -13,7 +13,6 @@ const StyledTable = styled.div`
 const StyledBody = styled.section`
   padding: 1.2rem 2.4rem;
   background-color: var(--color-grey-200);
-  /* border-bottom: 1px solid black; */
   max-width: 55vw;
 
   &:not(:last-child) {

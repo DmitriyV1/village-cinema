@@ -8,6 +8,7 @@ import AddMovie from "./pages/AddMovie";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import { createContext, useState } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,46 +19,52 @@ const queryClient = new QueryClient({
   },
 });
 
+export const UserContext = createContext();
+
 function App() {
+  const [user, setUser] = useState();
+
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <GlobalStyles />
-        <BrowserRouter>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<Navigate replace to="schedule" />} />
-              <Route path="schedule" element={<Schedule />} />
-              <Route path="poster" element={<Poster />} />
-              <Route path="account" element={<Account />} />
-              <Route path="addMovie" element={<AddMovie />} />
-              <Route path="addMovie/:movieId" element={<AddMovie />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+      <UserContext.Provider value={{ user, setUser }}>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <GlobalStyles />
+          <BrowserRouter>
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route index element={<Navigate replace to="schedule" />} />
+                <Route path="schedule" element={<Schedule />} />
+                <Route path="poster" element={<Poster />} />
+                <Route path="account" element={<Account />} />
+                <Route path="addMovie" element={<AddMovie />} />
+                <Route path="addMovie/:movieId" element={<AddMovie />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
 
-        <Toaster
-          position="top-center"
-          gutter={12}
-          containerStyle={{ margin: "8px" }}
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: {
-              duration: 5000,
-            },
-            style: {
-              fontSize: "16px",
-              maxWidth: "500px",
-              padding: "16px 24px",
-              backgroundColor: "var9--color-grey-0)",
-              color: "var(--color-grey-700)",
-            },
-          }}
-        />
-      </QueryClientProvider>
+          <Toaster
+            position="top-center"
+            gutter={12}
+            containerStyle={{ margin: "8px" }}
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: {
+                duration: 5000,
+              },
+              style: {
+                fontSize: "16px",
+                maxWidth: "500px",
+                padding: "16px 24px",
+                backgroundColor: "var9--color-grey-0)",
+                color: "var(--color-grey-700)",
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </UserContext.Provider>
     </>
   );
 }

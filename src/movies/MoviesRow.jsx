@@ -26,7 +26,6 @@ const Wrapper = styled.div`
 
 function MoviesRow({ movie }) {
   const { id, country, genre: genres, name, time, year, poster } = movie;
-  console.log(movie);
   return (
     <>
       <Wrapper>

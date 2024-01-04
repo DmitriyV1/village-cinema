@@ -17,6 +17,7 @@ export async function addOrder(orderData) {
 
 export async function getOrder(order) {
   const { time, date, name } = { ...order };
+  console.log(order);
   let { data, error } = await supabase
     .from("orders")
     .select("*")

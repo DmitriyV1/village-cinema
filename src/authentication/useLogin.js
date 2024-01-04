@@ -12,6 +12,7 @@ function useLogin() {
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user.user);
       navigate("/poster", { replace: true });
+      toast.success("You succeseffully logged in!");
     },
     onError: (err) => {
       toast.error("Provided email or password are incorrect");

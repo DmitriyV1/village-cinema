@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useLogin from "./useLogin";
 import FormRow from "../ui/FormRow";
 import Input from "../ui/Input";
@@ -7,11 +7,13 @@ import Spinner from "../ui/Spinner";
 import Form from "../ui/Form";
 import Modal from "../ui/Modal";
 import SignupForm from "./Signupform";
+import { UserContext } from "../App";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isLoading } = useLogin();
+  const { setUser } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,6 +26,9 @@ function LoginForm() {
         onSettled: () => {
           setEmail("");
           setPassword("");
+        },
+        onSuccess: () => {
+          setUser(email);
         },
       }
     );
