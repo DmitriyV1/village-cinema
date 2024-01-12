@@ -3,7 +3,6 @@ import useLogin from "./useLogin";
 import FormRow from "../ui/FormRow";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-import Spinner from "../ui/Spinner";
 import Form from "../ui/Form";
 import Modal from "../ui/Modal";
 import SignupForm from "./Signupform";
@@ -60,7 +59,7 @@ function LoginForm() {
 
       <FormRow>
         <Button size="large" disabled={isLoading}>
-          {isLoading ? <Spinner /> : "Log in"}
+          {isLoading ? "Loading..." : "Log in"}
         </Button>
 
         {
@@ -69,7 +68,7 @@ function LoginForm() {
         <Modal>
           <Modal.Open opens="form">
             <Button size="large" disabled={isLoading} variation="secondary">
-              {isLoading ? <Spinner /> : "Register"}
+              {isLoading ? "Loading..." : "Register"}
             </Button>
           </Modal.Open>
           <Modal.Window name="form">

@@ -22,6 +22,7 @@ const Img = styled.img`
 const Wrapper = styled.div`
   border-bottom: solid 1px var(--color-grey-500);
   margin-bottom: 1.8rem;
+  padding-top: 2.6rem;
 `;
 
 function MoviesRow({ movie }) {

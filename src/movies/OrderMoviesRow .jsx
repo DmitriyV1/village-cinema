@@ -10,6 +10,8 @@ const RowUnit = styled.span`
   font-family: "Sono";
   border-bottom: solid 1px var(--color-grey-400);
   max-width: 70vh;
+  /* padding-top: 1rem; */
+  /* margin-top: 1rem; */
 `;
 
 const AuthorText = styled.span`
@@ -35,6 +37,7 @@ const Wrapper = styled.div`
   border-bottom: solid 1px var(--color-grey-500);
   padding-bottom: 1.2rem;
   position: relative;
+  padding-top: 1rem;
 `;
 
 const StyledParametrs = styled.div`
